@@ -86,6 +86,8 @@ RCT_EXPORT_MODULE()
   for (NSUInteger i = 0; i < deviceTokenLength; i++) {
     [hexString appendFormat:@"%02x", bytes[i]];
   }
+  NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
+  NSLog(@"%@", deviceToken);
   [[NSNotificationCenter defaultCenter] postNotificationName:kRemoteNotificationsRegistered
                                                       object:self
                                                     userInfo:@{@"deviceToken" : [hexString copy]}];
@@ -101,6 +103,8 @@ RCT_EXPORT_MODULE()
 + (void)didReceiveRemoteNotification:(NSDictionary *)notification
 {
   NSDictionary *userInfo = @{@"notification": notification};
+  NSLog(@"didReceiveRemoteNotification");
+  NSLog(@"%@", notification);
   [[NSNotificationCenter defaultCenter] postNotificationName:RCTRemoteNotificationReceived
                                                       object:self
                                                     userInfo:userInfo];
@@ -109,6 +113,8 @@ RCT_EXPORT_MODULE()
 + (void)didReceiveRemoteNotification:(NSDictionary *)notification
               fetchCompletionHandler:(RNCRemoteNotificationCallback)completionHandler
 {
+  NSLog(@"didReceiveRemoteNotification | fetchCompletionHandler");
+  NSLog(@"%@", notification);
   NSDictionary *userInfo = @{@"notification": notification, @"completionHandler": completionHandler};
   [[NSNotificationCenter defaultCenter] postNotificationName:RCTRemoteNotificationReceived
                                                       object:self
@@ -124,6 +130,8 @@ RCT_EXPORT_MODULE()
 
 + (void)didReceiveNotificationResponse:(UNNotificationResponse *)response
 API_AVAILABLE(ios(10.0)) {
+  NSLog(@"didReceiveNotificationResponse");
+  NSLog(@"%@", response);
     [[NSNotificationCenter defaultCenter] postNotificationName:kLocalNotificationReceived
                                                       object:self
                                                     userInfo:[RCTConvert RCTFormatUNNotificationResponse:response]];
@@ -154,6 +162,8 @@ API_AVAILABLE(ios(10.0)) {
 
 - (void)handleRemoteNotificationsRegistered:(NSNotification *)notification
 {
+  NSLog(@"handleRemoteNotificationsRegistered");
+  NSLog(@"%@", notification);
   [self sendEventWithName:@"remoteNotificationsRegistered" body:notification.userInfo];
 }
 
