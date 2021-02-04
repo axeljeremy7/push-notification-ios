@@ -102,8 +102,8 @@ RCT_EXPORT_MODULE()
 
 + (void)didReceiveRemoteNotification:(NSDictionary *)notification
 {
-  NSDictionary *userInfo = @{@"notification": notification};
   NSLog(@"didReceiveRemoteNotification");
+  NSDictionary *userInfo = @{@"notification": notification};
   NSLog(@"%@", notification);
   [[NSNotificationCenter defaultCenter] postNotificationName:RCTRemoteNotificationReceived
                                                       object:self
@@ -123,6 +123,7 @@ RCT_EXPORT_MODULE()
 
 + (void)didReceiveLocalNotification:(UILocalNotification *)notification
 {
+   NSLog(@"didReceiveLocalNotification");
     [[NSNotificationCenter defaultCenter] postNotificationName:kLocalNotificationReceived
                                                       object:self
                                                     userInfo:[RCTConvert RCTFormatLocalNotification:notification]];
@@ -139,6 +140,8 @@ API_AVAILABLE(ios(10.0)) {
 
 - (void)handleLocalNotificationReceived:(NSNotification *)notification
 {
+  NSLog(@"handleLocalNotificationReceived");
+  NSLog(@"%@", notification);
   [self sendEventWithName:@"localNotificationReceived" body:notification.userInfo];
 }
 
@@ -169,6 +172,8 @@ API_AVAILABLE(ios(10.0)) {
 
 - (void)handleRemoteNotificationRegistrationError:(NSNotification *)notification
 {
+  NSLog(@"handleRemoteNotificationRegistrationError");
+  NSLog(@"%@", notification);
   NSError *error = notification.userInfo[@"error"];
   NSDictionary *errorDetails = @{
     @"message": error.localizedDescription,
