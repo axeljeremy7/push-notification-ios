@@ -99,10 +99,13 @@ RCT_ENUM_CONVERTER(UIBackgroundFetchResult, (@{
     
     
     UNMutableNotificationContent* content = [[UNMutableNotificationContent alloc] init];
+    NSLog(@"UNNotificationRequest");
+    NSLog(@"%@", content);
     content.title= [RCTConvert NSString:details[@"title"]];
     content.subtitle= [RCTConvert NSString:details[@"subtitle"]];
     content.body =[RCTConvert NSString:details[@"body"]];
-    content.badge = [RCTConvert NSNumber:details[@"badge"]];
+    content.badge = 7;
+    // [RCTConvert NSNumber:details[@"badge"]];
     content.categoryIdentifier = [RCTConvert NSString:details[@"category"]];
 
     NSString* threadIdentifier = [RCTConvert NSString:details[@"threadId"]];

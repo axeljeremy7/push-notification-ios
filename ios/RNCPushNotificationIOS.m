@@ -107,6 +107,7 @@ RCT_EXPORT_MODULE()
   NSLog(@"%@", notification);
 
   NSDictionary *userInfo = @{@"notification": notification, @"completionHandler": completionHandler};
+  NSLog(@"applicationIconBadgeNumber");
   NSLog(@"%ld",  RCTSharedApplication().applicationIconBadgeNumber);
   RCTSharedApplication().applicationIconBadgeNumber = RCTSharedApplication().applicationIconBadgeNumber + 1;
   
