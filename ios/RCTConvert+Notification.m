@@ -104,7 +104,8 @@ RCT_ENUM_CONVERTER(UIBackgroundFetchResult, (@{
     content.title= [RCTConvert NSString:details[@"title"]];
     content.subtitle= [RCTConvert NSString:details[@"subtitle"]];
     content.body =[RCTConvert NSString:details[@"body"]];
-    content.badge = 7;
+    NSNumber *myNSIntegerNumber = [NSNumber numberWithInteger:7];
+    content.badge = [RCTConvert myNSIntegerNumber];
     // [RCTConvert NSNumber:details[@"badge"]];
     content.categoryIdentifier = [RCTConvert NSString:details[@"category"]];
 
